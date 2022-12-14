@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"  href="./Assets/reset.css">
+    <link rel="stylesheet" href="./Assets/style.css">
+</head>
+<body>
+    <div class = "container">
+        <h1>Coding Quiz!</h1>
+        <span id="count">Time Left: 60 seconds</span>
+        <span id="score">Score:</span>
+        <div id = "question-container" class = "hide">
+            <div id= "question">Questions</div>
+            <section id = "answer-buttons" class = "button-grid">
+                <button class = "button">Answer 1</button>
+                <button class = "button">Answer 2</button>
+                <button class = "button">Answer 3</button>
+                <button class = "button">Answer 4</button>
+            </section> 
+            <section class="begin">
+                <button id = "start-button">Start</button>
+            </section>
+            <section id = "initials" class = "hide">
+                <label for="initials">Enter Your Initials</label>
+                <input type="text" id="initials" initials="initials">
+            </section>
+        </div>
+    </div>
+</body>
+</html>
+<script src="./Assets/script.js"></script>
