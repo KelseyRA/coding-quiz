@@ -11,25 +11,27 @@
 <body>
     <div class = "container">
         <h1>Coding Quiz!</h1>
-        <span id="count">Time Left: 60 seconds</span>
+        <span class = "timeleft" id="count">Time Left: 60 seconds</span>
         <span id="score">Score:</span>
-        <div id = "question-container" class = "hide">
-            <div id= "question">Questions</div>
-            <section id = "answer-buttons" class = "button-grid">
-                <button class = "button">Answer 1</button>
-                <button class = "button">Answer 2</button>
-                <button class = "button">Answer 3</button>
-                <button class = "button">Answer 4</button>
-            </section> 
-            <section class="begin">
-                <button id = "start-button">Start</button>
-            </section>
-            <section id = "initials" class = "hide">
-                <label for="initials">Enter Your Initials</label>
-                <input type="text" id="initials" initials="initials">
-            </section>
+        <div id = "question-container">
+            <div id= "question" class = "hide">Questions</div>
+                <div id = "answer-buttons" class = "hide">
+                    <button id = "A" class = "button">A</button>
+                    <button id = "B" class = "button">B</button>
+                    <button id = "C" class = "button">C</button>
+                    <button id = "D" class = "button">D</button>
+                </div> 
+                <section class="begin">
+                    <button id = "start-button">Start</button>
+                    <button id = "next-button">Next</button>
+                </section>
+                <section id = "initials" class = "hide">
+                    <label for="initials">Enter Your Initials</label>
+                    <input type="text" id="initials" initials="initials">
+                </section>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+    <script src="./Assets/script.js"></script>
 </body>
 </html>
-<script src="./Assets/script.js"></script>

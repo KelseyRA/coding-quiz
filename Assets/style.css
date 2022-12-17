@@ -37,11 +37,12 @@ h1 {
 }
 
 #question {
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: 300;
     margin: 10px;
 }
 
-.button-grid {
+#answer-buttons {
     display:grid;
     grid-template-columns: repeat(2, auto);
     gap: 15px;
@@ -81,8 +82,27 @@ h1 {
     cursor: pointer;
 }
 
+#next-button {
+    background-color: rgb(167, 232, 15);
+    font-size: 36px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+#next-button:hover {
+    color: white;
+    cursor: pointer;
+}
+
 #initials {
     margin: 10px;
+}
+
+.hide {
     display: none;
 }
 
+ /* .button {
+    display: none;
+}  */
