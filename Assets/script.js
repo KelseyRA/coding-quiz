@@ -1,28 +1,30 @@
 const startButton = document.getElementById("start-button");
 const nextButton = document.getElementById("next-button");
 var timerEl = document.getElementById("count");
-var answerButtons = document.getElementsByClassName("button");
 var questions = document.getElementById("question");
 var questionContainerEl = ("question-container");
-// var state = element.getAttribute("data-state");
-var A = document.getElementById("A");
-var B = document.getElementById("B");
-var C = document.getElementById("C");
-var D = document.getElementById("D");
+var initials = document.getElementById("initials");
 var hidden = document.getElementsByClassName("hide");
 var question = document.getElementById("question");
 var currentQuestion = 0;
 var timeLeft = 60;
-// questions[0].questions;
-
+var answerEl = document.getElementById("answer-buttons");
+// var score = localStorage.getElementById("score");
+var scoreCount = 0;
 
 // When user clicks the start button the startGame functions begins. This starts the timer and reveals the first questions.
 startButton.addEventListener("click", startGame);
 
+
+// Starts the game by calling the timer and display question functions.
+function startGame () {
+  timerEquals();
+  displayQuestions();
+  
+}
+
 function timerEquals() {
   var timeInterval = setInterval(function () {
-    
-    // As long as the `timeLeft` is greater than 1
     if (timeLeft > 1) {
       timerEl.textContent = timeLeft + ' seconds remaining';
       timeLeft--;
@@ -36,25 +38,24 @@ function timerEquals() {
   }, 1000);
 
 }
+
+// Asses the answer to see if it is correct. If incorrect remove 5 seconds from timer.
 function checkAnswer() {
 
-  console.log(this.dataset.value);
   if (this.dataset.value !== questions[currentQuestion].correct){
     timeLeft = timeLeft - 5
     timerEquals()
   }
   nextButton.classList.remove("hide");
-  nextButton.addEventListener("click", setNextQuestion);
-  
+  nextButton.addEventListener("click", setNextQuestion); 
 }
 
-function startGame () {
-  timerEquals()
-  var answerEl = document.getElementById("answer-buttons");
+// Displays questions and multiple choice answers. Cycles through four questions using a for loop.
+function displayQuestions () {
     question.classList.remove("hide");
     question.textContent = questions[currentQuestion].question;
     answerEl.textContent ="";
-    for (var i = 0; i < questions[currentQuestion].choices.length; i++){
+   for (var i = 0; i < questions[currentQuestion].choices.length; i++){
       var buttonEl = document.createElement("button");
       buttonEl.textContent = questions[currentQuestion].choices[i];
       buttonEl.setAttribute("class", "button");
@@ -62,14 +63,36 @@ function startGame () {
       buttonEl.addEventListener("click", checkAnswer);
       answerEl.appendChild(buttonEl);
     }
+    
+    // if (this.dataset.value === questions[currentQuestion].correct) {
+    //   score.textContent = (scoreCount++);
+    // }
 }
 
-
+// Moves on to the next question after an answer is selected using the 'next' button. If there isn't another question the quiz ends.
 function setNextQuestion() {
-   currentQuestion++
-   startGame()
+  if (currentQuestion === question.length) {
+    endGame();
+  }else {
+  currentQuestion++;
+  displayQuestions();
+   }
+  }
+  //  Called to end the game is the last question is answer or the time runs out.
+function endGame() {
+  initials.classList.remove("hide");
+  initials.textContent = "Game Over";
+}
+// Keeps track of the users score
+function setScore() {
+  // if (displayQuestions === questions[currentQuestion].correct) {
+  //   score.textContent = (scoreCount + 1);
+  // }
+  // use JSON to store values
 }
 
+
+// List of questions, multiple choice questions and the correct answer.
 var questions = [
     {
         question: "What does HTML stand for??",
@@ -87,7 +110,15 @@ var questions = [
         question: "What does CSS stand for?",
         choices: ["Cascading Style Sheet","Cats Singing Sade","Cascading Style Sheep","Code Style Sheet"],
         correct: "Cascading Style Sheet"
+    },
+
+    {
+      question: "What is jQuery?",
+      choices: ["Another form of JavaScript", "What JavaScript used to be called", "A fast, small, and feature-rich JavaScript library", "A type of CSS"],
+      correct: "A fast, small, and feature-rich JavaScript library"
     }
+
+
     
     ]
 
