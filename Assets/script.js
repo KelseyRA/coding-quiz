@@ -11,23 +11,16 @@ var C = document.getElementById("C");
 var D = document.getElementById("D");
 var hidden = document.getElementsByClassName("hide");
 var question = document.getElementById("question");
-questions[0].questions;
+var currentQuestion = 0;
+var timeLeft = 60;
+// questions[0].questions;
 
 
 // When user clicks the start button the startGame functions begins. This starts the timer and reveals the first questions.
 startButton.addEventListener("click", startGame);
 
-function startGame () {
-    console.log("Started");
-    // question.classList.remove("hide");
-    // question.textContent = "What does CSS stand for?"
-    // A.textContent = "Cascading Style Sheet";
-    // B.textContent = "Cats Singing Sade";
-    // C.textContent = "Cascading Style Sheep";
-    // D.textContent = "Code Style Sheet";
-
-    var timeLeft = 60;
-    var timeInterval = setInterval(function () {
+function timerEquals() {
+  var timeInterval = setInterval(function () {
     
     // As long as the `timeLeft` is greater than 1
     if (timeLeft > 1) {
@@ -42,48 +35,66 @@ function startGame () {
     }
   }, 1000);
 
-//   for (questions; )
+}
+function checkAnswer() {
+
+  console.log(this.dataset.value);
+  if (this.dataset.value !== questions[currentQuestion].correct){
+    timeLeft = timeLeft - 5
+    timerEquals()
+  }
+  nextButton.classList.remove("hide");
+  nextButton.addEventListener("click", setNextQuestion);
+  
 }
 
-nextButton.addEventListener("click", setNextQuestion);
+function startGame () {
+  timerEquals()
+  var answerEl = document.getElementById("answer-buttons");
+    question.classList.remove("hide");
+    question.textContent = questions[currentQuestion].question;
+    answerEl.textContent ="";
+    for (var i = 0; i < questions[currentQuestion].choices.length; i++){
+      var buttonEl = document.createElement("button");
+      buttonEl.textContent = questions[currentQuestion].choices[i];
+      buttonEl.setAttribute("class", "button");
+      buttonEl.setAttribute("data-value", questions[currentQuestion].choices[i]);
+      buttonEl.addEventListener("click", checkAnswer);
+      answerEl.appendChild(buttonEl);
+    }
+}
+
 
 function setNextQuestion() {
-    question.textContent = "What does HTML stand for?";
-    A.textContent = "Hypertext Map Language";
-    B.textContent = "Hypertext Markup Language";
-    C.textContent = "Happy Meerkats Laughing";
-    D.textContent = "High Markup Language";
+   currentQuestion++
+   startGame()
 }
 
 var questions = [
     {
         question: "What does HTML stand for??",
-        A:"Hypertext Map Language",
-        B: "Hypertext Markup Language",
-        C: "Happy Meerkats Laughing",
-        B: "High Markup Language",
-        correct: "B",
+        choices:["Hypertext Map Language", "Hypertext Markup Language", "Happy Meerkats Laughing", "High Markup Language"],
+        correct: "Hypertext Markup Language"
     },
     
     {
         question: "What does JS stand for?",
-        A:"Java",
-        B: "JavaSource",
-        C: "JoyScript",
-        D: "JavaScript", 
+        choices:["Java", "JavaSource", "JoyScript", "JavaScript"],
+        correct: "JavaScript"
     },
     
     {
         question: "What does CSS stand for?",
-        A:"Cascading Style Sheet",
-        B: "Cats Singing Sade",
-        C: "Cascading Style Sheep",
-        D: "Code Style Sheet", 
-        correct: "A",
+        choices: ["Cascading Style Sheet","Cats Singing Sade","Cascading Style Sheep","Code Style Sheet"],
+        correct: "Cascading Style Sheet"
     }
+    
     ]
 
-// Once the first question is answered a message appears either "right" or wrong. If wrong time is deducted from the total time. The next question is displayed.
+    console.log(questions);
+    console.log(questions[0]);
+
+
 
 
 // GIVEN I am taking a code quiz
