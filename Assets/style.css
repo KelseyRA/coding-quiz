@@ -30,10 +30,9 @@ h1 {
     padding: 10px;
 }
 
-#score {
-    float:right;
-    margin: 10px;
+.time-left {
     padding: 5px;
+    margin: 5px;
 }
 
 #question {
@@ -105,6 +104,37 @@ h1 {
 
 #initials {
     margin: 10px;
+}
+
+#submit {
+    background-color: blueviolet;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#submit:hover {
+    color: white;
+    cursor: pointer;
+}
+
+#submit:focus {
+    background-color: greenyellow;
+}
+
+#score {
+    float:right;
+    margin: 10px;
+    padding: 5px;
+}
+
+#last-score {
+    padding: 5px;
+    margin: 5px;
+}
+
+#player-name {
+    padding: 5px;
+    margin: 5px;
 }
 
 .hide {

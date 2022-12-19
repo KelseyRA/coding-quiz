@@ -1,7 +1,6 @@
 const startButton = document.getElementById("start-button");
 const nextButton = document.getElementById("next-button");
 var timerEl = document.getElementById("count");
-var questions = document.getElementById("question");
 var questionContainerEl = ("question-container");
 var initials = document.getElementById("initials");
 var hidden = document.getElementsByClassName("hide");
@@ -9,8 +8,11 @@ var question = document.getElementById("question");
 var currentQuestion = 0;
 var timeLeft = 60;
 var answerEl = document.getElementById("answer-buttons");
-// var score = localStorage.getElementById("score");
-var scoreCount = 0;
+var score = document.getElementById("score");
+var scoreCount = 1;
+var submit = document.getElementById("submit");
+var lastScore = document.getElementById("last-score");
+var playerName = document.getElementById("player-name")
 
 // When user clicks the start button the startGame functions begins. This starts the timer and reveals the first questions.
 startButton.addEventListener("click", startGame);
@@ -23,6 +25,8 @@ function startGame () {
   
 }
 
+
+// Timer that begins when the start button is pressed. Counts down from 1min. 5 seconds are deducted when a question is answered wrong.
 function timerEquals() {
   var timeInterval = setInterval(function () {
     if (timeLeft > 1) {
@@ -39,12 +43,14 @@ function timerEquals() {
 
 }
 
-// Asses the answer to see if it is correct. If incorrect remove 5 seconds from timer.
+// Assess the answer to see if it is correct. If incorrect remove 5 seconds from timer.
 function checkAnswer() {
 
   if (this.dataset.value !== questions[currentQuestion].correct){
     timeLeft = timeLeft - 5
-    timerEquals()
+    // timerEquals()
+  } else {
+    score.textContent = ("Score: " + (scoreCount++));
   }
   nextButton.classList.remove("hide");
   nextButton.addEventListener("click", setNextQuestion); 
@@ -63,34 +69,62 @@ function displayQuestions () {
       buttonEl.addEventListener("click", checkAnswer);
       answerEl.appendChild(buttonEl);
     }
-    
-    // if (this.dataset.value === questions[currentQuestion].correct) {
-    //   score.textContent = (scoreCount++);
-    // }
 }
 
 // Moves on to the next question after an answer is selected using the 'next' button. If there isn't another question the quiz ends.
 function setNextQuestion() {
-  if (currentQuestion === question.length) {
+  if (currentQuestion === questions.length - 1) {
     endGame();
   }else {
   currentQuestion++;
   displayQuestions();
    }
   }
+  
   //  Called to end the game is the last question is answer or the time runs out.
 function endGame() {
   initials.classList.remove("hide");
-  initials.textContent = "Game Over";
-}
-// Keeps track of the users score
-function setScore() {
-  // if (displayQuestions === questions[currentQuestion].correct) {
-  //   score.textContent = (scoreCount + 1);
-  // }
-  // use JSON to store values
+  lastScore.classList.remove("hide");
+  playerName.classList.remove("hide");
+  // var sign = document.querySelector("#player-name").value;
 }
 
+function renderHighScore() {
+  score.localStorage.getItem("score");
+  initials.localStorage.getItem("initials");
+  localStorage.setItem("player-name", playerName);
+  localStorage.setItem("last-score", lastScore);
+}
+
+submit.addEventListener("click", function(event){
+  event.preventDefault();
+  localStorage.setItem("last-score", lastScore);
+  localStorage.setItem("player-name", playerName);
+  renderHighScore();
+})
+
+// function renderLastRegistered() {
+//   var email = localStorage.getItem("email");
+//   var password = localStorage.getItem("password");
+
+  // use JSON to store values
+  // signUpButton.addEventListener("click", function(event) {
+  //   event.preventDefault();
+  
+  //   var email = document.querySelector("#email").value;
+  //   var password = document.querySelector("#password").value;
+  
+  //   if (email === "") {
+  //     displayMessage("error", "Email cannot be blank");
+  //   } else if (password === "") {
+  //     displayMessage("error", "Password cannot be blank");
+  //   } else {
+  //     displayMessage("success", "Registered successfully");
+  
+  //     localStorage.setItem("email", email);
+  //     localStorage.setItem("password", password);
+  //     renderLastRegistered();
+  //   }
 
 // List of questions, multiple choice questions and the correct answer.
 var questions = [
