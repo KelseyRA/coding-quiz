@@ -12,8 +12,11 @@
 
 <body>
     <div class="container">
+        <!-- Header of Quiz -->
         <h1>Coding Quiz!</h1>
+        <!-- Countdown timer starting at 1min -->
         <span class="time-left" id="count">Time Left: 60 seconds</span>
+        <!-- Container with questions, start, and next button -->
         <div id="question-container">
             <div id="question" class="hide">Questions</div>
             <div id="answer-buttons" class="hide"></div>
@@ -21,11 +24,13 @@
                 <button id="start-button">Start</button>
                 <button id="next-button" class="hide">Next</button>
             </section>
+            <!-- Displays after last question is answered -->
             <section id="initials" class="hide">
                 <label for="initials">Enter Your Initials</label>
                 <input type="text" id="sign" initials="initials">
                 <button id="submit">Submit</button>
             </section>
+            <!-- Tracks score -->
             <span id="score">Score:</span>
             <div id="last-score" class="hide">Last Score:</div>
             <div id="player-name" class="hide">Player Name:</div>

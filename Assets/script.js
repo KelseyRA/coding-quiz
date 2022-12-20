@@ -12,7 +12,12 @@ var score = document.getElementById("score");
 var scoreCount = 1;
 var submit = document.getElementById("submit");
 var lastScore = document.getElementById("last-score");
-var playerName = document.getElementById("player-name")
+var playerName = document.getElementById("player-name");
+var highScoreArray = [];
+var highScore = {
+  initials: initials,
+  score: score
+}
 
 // When user clicks the start button the startGame functions begins. This starts the timer and reveals the first questions.
 startButton.addEventListener("click", startGame);
@@ -80,51 +85,31 @@ function setNextQuestion() {
   displayQuestions();
    }
   }
-  
+
   //  Called to end the game is the last question is answer or the time runs out.
 function endGame() {
   initials.classList.remove("hide");
   lastScore.classList.remove("hide");
   playerName.classList.remove("hide");
-  // var sign = document.querySelector("#player-name").value;
 }
 
 function renderHighScore() {
   score.localStorage.getItem("score");
   initials.localStorage.getItem("initials");
-  localStorage.setItem("player-name", playerName);
-  localStorage.setItem("last-score", lastScore);
 }
+
+lastScore.textContent = "Last Score: " + lastScore;
+playerName.textContent = "Player Name: " + playerName;
 
 submit.addEventListener("click", function(event){
   event.preventDefault();
+  var lastScore = document.querySelector("#last-score").value;
+  var playerName = document.querySelector("#player-name").value;
+
   localStorage.setItem("last-score", lastScore);
   localStorage.setItem("player-name", playerName);
   renderHighScore();
 })
-
-// function renderLastRegistered() {
-//   var email = localStorage.getItem("email");
-//   var password = localStorage.getItem("password");
-
-  // use JSON to store values
-  // signUpButton.addEventListener("click", function(event) {
-  //   event.preventDefault();
-  
-  //   var email = document.querySelector("#email").value;
-  //   var password = document.querySelector("#password").value;
-  
-  //   if (email === "") {
-  //     displayMessage("error", "Email cannot be blank");
-  //   } else if (password === "") {
-  //     displayMessage("error", "Password cannot be blank");
-  //   } else {
-  //     displayMessage("success", "Registered successfully");
-  
-  //     localStorage.setItem("email", email);
-  //     localStorage.setItem("password", password);
-  //     renderLastRegistered();
-  //   }
 
 // List of questions, multiple choice questions and the correct answer.
 var questions = [
@@ -156,20 +141,3 @@ var questions = [
     
     ]
 
-    console.log(questions);
-    console.log(questions[0]);
-
-
-
-
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
