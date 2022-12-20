@@ -93,6 +93,7 @@ function endGame() {
   playerName.classList.remove("hide");
 }
 
+// Saves and displays score (not working correctly).
 function renderHighScore() {
   score.localStorage.getItem("score");
   initials.localStorage.getItem("initials");
